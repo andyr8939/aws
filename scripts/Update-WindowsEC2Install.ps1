@@ -41,6 +41,10 @@ Invoke-WebRequest -Uri https://s3.amazonaws.com/ec2-downloads-windows/EC2Launch/
 Write-Output "Installing EC2 Config"
 .\install.ps1
 
+# Replace EC2 Configs with original configs
+Write-Output "Restoring EC2 Config Backups"
+Expand-Archive -Path $Download_Location\Ec2ConfigBackup.zip -DestinationPath C:\ProgramData\Amazon\EC2-Windows\Launch\Config\ -Force
+
 Write-Output "Cleaning up install files"
 Remove-Item -Path $Download_Location\EC2-Windows-Launch.zip -Recurse -Force
 Remove-Item -Path $Download_Location\Ec2Install -Recurse -Force
